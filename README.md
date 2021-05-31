@@ -88,8 +88,8 @@ Header -> Authorization: Token <is_superuser token>
 Header -> Authorization: Token <is_superuser token>
 
 {
-  "a_coefficient": 100,
-  "b_coefficient": 100
+  "a_coefficient": 5,
+  "b_coefficient": 2
 }
 
 #### Registering vehicle at arrival moment
