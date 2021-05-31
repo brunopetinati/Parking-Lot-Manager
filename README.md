@@ -10,6 +10,7 @@ This is only the back-end API.
 ## Details
 
 Prices will be calculated using the following formula: Total_Price = a_coefficient + b_coefficient * Delta_Hour(leaving - entering).
+Note: no delete routes were implemented. Errors in creating specified floors would require deletion in local DB.
 
 ## Installation
 
