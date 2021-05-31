@@ -5,7 +5,7 @@ import ipdb
 
 class ParkingSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
-    name = serializers.CharField
+    name = serializers.CharField()
     fill_priority = serializers.IntegerField()
     car_spaces = serializers.IntegerField(write_only=True)
     motorcycle_spaces = serializers.IntegerField(write_only=True)

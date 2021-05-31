@@ -19,3 +19,5 @@ class PricingView(ListCreateAPIView):
     queryset = PricingModel.objects.all()
     serializer_class = PricingSerializer
     
+
+    

@@ -21,7 +21,7 @@ class VehicleEntryView(APIView):
 
         # verificação se existe precificação
         if not PricingModel.objects.last():
-            return Reponse({'error':'no pricing registered'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error':'no pricing registered'}, status=status.HTTP_404_NOT_FOUND)
 
         serializer = VehicleSerializer(data=request.data)
 
@@ -31,11 +31,11 @@ class VehicleEntryView(APIView):
         if request.data['vehicle_type'] not in [k for k,v in SpaceType.choices]:
             return Response({'message':'invalid vehicle type'})
 
-        parking = find_paking_all(request.data['vehicle_type'])
+        find_space = find_paking_all(request.data['vehicle_type'])
 
         # caso há vaga, cria um objeto veículo, e atribui a vaga
-        if parking:
-            vehicle = VehicleModel.objects.create(**request.data, space=parking)
+        if find_space:
+            vehicle = VehicleModel.objects.create(**request.data, space=find_space)
             serializer = VehicleSerializer(vehicle)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
@@ -48,7 +48,7 @@ class VehicleExitView(APIView):
 
         # caso o veículo já tenha deixado o estacionamento, e mesmo assim tenta-se aplicar outra saída
         if vehicle.space == None:
-            return Reponse({'error':'vehicle not found'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'error':'vehicle not found'}, status=status.HTTP_404_NOT_FOUND)
 
         pricing = PricingModel.objects.last()
         amount_paid = pricing.calculate_fee(vehicle)

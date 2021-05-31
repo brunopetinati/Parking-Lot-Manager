@@ -18,10 +18,10 @@ def has_parking_by_type(floor, vehicle_type):
     return None
 
 # verifica se há vaga em algum outro nível (ou em outros níveis/andares)
-# o sinal de menos indica do menor para o maior, ordem crescente 
+# o sinal de menos indica do maior para o menor, ordem decrescente 
 
 def find_paking_all(vehicle_type):
-    floors_by_priority = ParkingModel.objects.order_by('-fill_priority')
+    floors_by_priority = ParkingModel.objects.order_by('fill_priority')
 
     # para cada nível, checa com a função de cima, se há vaga
     for floor in floors_by_priority:
